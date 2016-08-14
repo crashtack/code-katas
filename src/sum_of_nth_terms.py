@@ -18,3 +18,16 @@ def series_sum(n):
             # print('range(n): {}'.format(i))
             out += 1 / ((i * 2) + (i - 2))
         return('{:.2f}'.format(out))
+
+
+def series_sum2(n):
+    return '{:.2f}'.format(sum(1.0 / (i * 3 + 1) for i in range(n)))
+
+
+def series_sum3(n):
+    amount = 0
+    for i in range(n):
+        amount += 1.0 / (i * 3 + 1)
+    return '{:.2f}'.format(amount)
+
+print(series_sum3(5))
