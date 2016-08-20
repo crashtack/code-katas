@@ -1,23 +1,16 @@
 # -*- coding utf-8 -*-
-
+import pytest
 from parenthetics import parenthetics
 
 
-def test_open():
-    s = '((some)thing((here)'
-    assert parenthetics(s) == 1
+PAR_TABLE = [
+    ('((some)thing((here)', 1),
+    ('(((milk)()stool((dog))()(cheese))(cat)())', 0),
+    ('(()))', -1),
+    (')))(((', -1)
+]
 
 
-def test_balanced():
-    s = '(((milk)()stool((dog))()(cheese))(cat)())'
-    assert parenthetics(s) == 0
-
-
-def test_broken():
-    s = '(()))'
-    assert parenthetics(s) == -1
-
-
-def test_broken2():
-    s = ')))((('
-    assert parenthetics(s) == -1
+@pytest.mark.parametrize('s, result', PAR_TABLE)
+def test_parenthetics(s, result):
+    assert parenthetics(s) == result
