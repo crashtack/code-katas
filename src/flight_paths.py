@@ -45,23 +45,43 @@ def import_cities():
     return cities
 
 
-def populate_city_weighted_graph(cities):
+def populate_city_nodes(cities):
     '''Populates a weighted graph with city and conection info'''
-    g = Graph()
-    for index, city in enumerate(import_cities()):
-        if index < 10:
-            g.add_node(city['city'])
-    print(g.nodes())
+    d = {}
+    for index, city in enumerate(cities):
+        print('index: {} airport: {} lat_lon: {}'
+              .format(index, city['airport'], city['lat_lon']))
+        try:
+            d.setdefault(city['airport'], city['lat_lon'])
+
+        except ValueError:
+            print('\n\nindex: {} airport: {}'.format(index, city['airport']))
+            print('VALUE_ERROR\n\n')
+            pass
+            # import pdb; pdb.set_trace()
+    # print(g.nodes())
+    return d
+
+
+def populate_edges(g, cities):
+    '''Add weighted edges(destination_airports, distance) to the
+       graph for each node(airport)'''
+    for index, city in enumerate(cities):
+        for destination_airports in city:
+            w = 0
+
+        g.add_edge(airport, destination_airports, w)
+    return g
 
 
 if __name__ == "__main__":
     cities = import_cities()
-    populate_city_weighted_graph(cities)
-
-    for index, item in enumerate(import_cities()):
+    g = populate_city_nodes(cities)
+    # g = populate_edges(g, cities)
+    # for index, item in enumerate(import_cities()):
     # if index == 1:
-        if item['city'] == "Kinshasa":
-            import pdb; pdb.set_trace()
-            for key in item:
-                print(key)
-                print(item[key])
+        # if item['city'] == "Kinshasa":
+            # import pdb; pdb.set_trace()
+            # for key in item:
+                # print(key)
+                # print(item[key])
