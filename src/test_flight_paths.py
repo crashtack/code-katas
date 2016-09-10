@@ -39,4 +39,12 @@ def test_cities_dicts_have_lat_lon(cities):
     assert cities[0]['lat_lon']
 
 
+def test_populate_city_weighted_graph_exists():
+    '''test that the import json file exists'''
+    from flight_paths import populate_city_weighted_graph
+
+
+
+
+
 #
