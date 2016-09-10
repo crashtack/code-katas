@@ -6,7 +6,7 @@ import requests
 from graph import Graph
 
 
-def import_city_json():
+def import_cities():
     '''
         Import the city flight connection path JSON file,
         Returns dictionary of cities
@@ -22,10 +22,10 @@ def populate_city_weighted_graph(cities):
 
 
 if __name__ == "__main__":
-    for index, item in enumerate(data):
+    for index, item in enumerate(import_cities()):
     # if index == 1:
         if item['city'] == "Kinshasa":
             import pdb; pdb.set_trace()
             for key in item:
                 print(key)
-                print(item['destination_cities'])
+                print(item[key])
