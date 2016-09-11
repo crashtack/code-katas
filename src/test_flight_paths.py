@@ -15,12 +15,19 @@ def cd():
     from flight_paths import populate_city_dict
     cities = [{'airport': 'Stockholm-Bromma Airport',
                'destination_airports':
-               ['Uruapan International Airport'],
+               ['Uruapan International Airport',
+                'Sir Seewoosagur Ramgoolam International Airport'],
                'lat_lon': [59.35444, 17.93972]},
               {'airport': 'Uruapan International Airport',
                'destination_airports':
-               ['Stockholm-Bromma Airport'],
-               'lat_lon': [19.39667, -102.03917]}
+               ['Stockholm-Bromma Airport',
+                'Sir Seewoosagur Ramgoolam International Airport'],
+               'lat_lon': [19.39667, -102.03917]},
+              {'airport': 'Sir Seewoosagur Ramgoolam International Airport',
+               'destination_airports':
+               ['Stockholm-Bromma Airport',
+                'Uruapan International Airport'],
+               'lat_lon': [-20.4300278, 57.6830222]}
               ]
     return populate_city_dict(cities)
 
@@ -30,12 +37,19 @@ def edges(cd):
     from flight_paths import populate_edges
     cities = [{'airport': 'Stockholm-Bromma Airport',
                'destination_airports':
-               ['Uruapan International Airport'],
+               ['Uruapan International Airport',
+                'Sir Seewoosagur Ramgoolam International Airport'],
                'lat_lon': [59.35444, 17.93972]},
               {'airport': 'Uruapan International Airport',
                'destination_airports':
-               ['Stockholm-Bromma Airport'],
-               'lat_lon': [19.39667, -102.03917]}
+               ['Stockholm-Bromma Airport',
+                'Sir Seewoosagur Ramgoolam International Airport'],
+               'lat_lon': [19.39667, -102.03917]},
+              {'airport': 'Sir Seewoosagur Ramgoolam International Airport',
+               'destination_airports':
+               ['Stockholm-Bromma Airport',
+                'Uruapan International Airport'],
+               'lat_lon': [-20.4300278, 57.6830222]}
               ]
     # import pdb; pdb.set_trace()
     return populate_edges(cd, cities)
@@ -90,7 +104,7 @@ def test_destination_edges_exitsts():
 
 def test_populate_edges_adds_edges(edges):
     '''test populate adds edges to weighted graph'''
-    # import pdb; pdb.set_trace()
+    import pdb; pdb.set_trace()
     assert edges.graph == {'Stockholm-Bromma Airport':
     {'Uruapan International Airport': 6038.31006865406},
     'Uruapan International Airport':
