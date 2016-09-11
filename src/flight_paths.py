@@ -41,7 +41,7 @@ def populate_edges(cd, cities):
         airport = city['airport']
         for index2, dest_airport in enumerate(city['destination_airports']):
 
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             try:
                 distance = calculate_distance(cd[airport],
                                               cd[dest_airport])

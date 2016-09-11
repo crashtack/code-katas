@@ -28,6 +28,10 @@ class Graph(object):
 
         return list(self.graph.keys())
 
+    def node(self, n):
+        '''returns the node for key'''
+        return self.graph[n]
+
     def edges(self):
         '''returns a list of tuples, that are edges'''
         return self.graph.values()
@@ -44,7 +48,7 @@ class Graph(object):
            n1 or n2 are not already present in the graph, they are added.'''
         if n2 not in self.graph:
             self.graph[n2] = {}
-        self.graph[n1] = {n2: w}
+        self.graph[n1][n2] = w
 
     def del_node(self, n):
         '''deleates node n'''
