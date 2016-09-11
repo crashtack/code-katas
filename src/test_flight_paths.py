@@ -10,42 +10,35 @@ def cities():
 
 
 @pytest.fixture(scope='session')
-def nodes():
-    from flight_paths import populate_city_nodes
+def cd():
+    '''returns a dictionary'''
+    from flight_paths import populate_city_dict
     cities = [{'airport': 'Stockholm-Bromma Airport',
                'destination_airports':
-               ["Mohamed Boudiaf Airport",
-                "Ain Arnat Airport",
-                "Hurghada International Airport"]},
-              {'airport': 'Ponciano Arriaga International Airport',
+               ['Uruapan International Airport'],
+               'lat_lon': [59.35444, 17.93972]},
+              {'airport': 'Uruapan International Airport',
                'destination_airports':
-               ["Menorca Airport",
-                "Palma de Mallorca Airport",
-                "Tenerife South Airport",
-                "Frankfurt Airport",
-                "Munich Airport"]}
+               ['Stockholm-Bromma Airport'],
+               'lat_lon': [19.39667, -102.03917]}
               ]
-    return populate_city_nodes(cities)
+    return populate_city_dict(cities)
 
 
 @pytest.fixture(scope='function')
-def edges(nodes):
+def edges(cd):
     from flight_paths import populate_edges
     cities = [{'airport': 'Stockholm-Bromma Airport',
                'destination_airports':
-               ["Mohamed Boudiaf Airport",
-                "Ain Arnat Airport",
-                "Hurghada International Airport"]},
-              {'airport': 'Ponciano Arriaga International Airport',
+               ['Uruapan International Airport'],
+               'lat_lon': [59.35444, 17.93972]},
+              {'airport': 'Uruapan International Airport',
                'destination_airports':
-               ["Menorca Airport",
-                "Palma de Mallorca Airport",
-                "Tenerife South Airport",
-                "Frankfurt Airport",
-                "Munich Airport"]}
+               ['Stockholm-Bromma Airport'],
+               'lat_lon': [19.39667, -102.03917]}
               ]
     # import pdb; pdb.set_trace()
-    return populate_edges(nodes, cities)
+    return populate_edges(cd, cities)
 
 
 def test_import_cities():
@@ -80,14 +73,14 @@ def test_cities_dicts_have_lat_lon(cities):
 
 def test_populate_city_graph_exists():
     '''test that the import for populate_city_nodes works'''
-    from flight_paths import populate_city_nodes
+    from flight_paths import populate_city_dict
 
 
-def test_city_nodes(nodes):
+def test_city_dict(cd):
     '''test that the weighted graph city nodes are beeing populated'''
     # import pdb; pdb.set_trace()
-    assert nodes.graph == {'Stockholm-Bromma Airport': {},
-                           'Ponciano Arriaga International Airport': {}}
+    assert d == {'Uruapan International Airport': [19.39667, -102.03917],
+                 'Stockholm-Bromma Airport': [59.35444, 17.93972]}
 
 
 def test_destination_edges_exitsts():
@@ -97,6 +90,7 @@ def test_destination_edges_exitsts():
 
 def test_populate_edges_adds_edges(edges):
     '''test populate adds edges to weighted graph'''
+    # import pdb; pdb.set_trace()
     assert edges.graph == {'Stockholm-Bromma Airport': {1: 42, 2: 42},
                            'Ponciano Arriaga International Airport': {1: 42, 2: 42}
                            }

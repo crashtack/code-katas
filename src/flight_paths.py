@@ -45,7 +45,7 @@ def import_cities():
     return cities
 
 
-def populate_city_nodes(cities):
+def populate_city_dict(cities):
     '''Populates a weighted graph with city and conection info'''
     d = {}
     for index, city in enumerate(cities):
@@ -63,25 +63,23 @@ def populate_city_nodes(cities):
     return d
 
 
-def populate_edges(g, cities):
+def populate_edges(cd, cities):
     '''Add weighted edges(destination_airports, distance) to the
        graph for each node(airport)'''
+    g = Graph()
     for index, city in enumerate(cities):
-        for destination_airports in city:
-            w = 0
+        airport = city['airport']
+        for destination_airport in city['destination_airports']:
+            print('destination_airports: {}'.format(destination_airport))
+            # import pdb; pdb.set_trace()
+            distance = calculate_distance(cd[airport], cd[destination_airport])
+            g.add_edge(airport, destination_airport, distance)
 
-        g.add_edge(airport, destination_airports, w)
     return g
 
 
 if __name__ == "__main__":
-    cities = import_cities()
-    g = populate_city_nodes(cities)
+    # cities = import_cities()
+    # g = populate_city_nodes(cities)
     # g = populate_edges(g, cities)
-    # for index, item in enumerate(import_cities()):
-    # if index == 1:
-        # if item['city'] == "Kinshasa":
-            # import pdb; pdb.set_trace()
-            # for key in item:
-                # print(key)
-                # print(item[key])
+    print('stockholm')
