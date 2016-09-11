@@ -12,25 +12,23 @@ def calculate_distance(point1, point2):
     point1 and point2 must have the format [latitude, longitude].
     The return value is a float.
 
-    Modified and converted to Python from:
-    http://www.movable-type.co.uk/scripts/latlong.html
+    Modified and converted to Python from: http://www.movable-type.co.uk/scripts/latlong.html
     """
     import math
 
     def convert_to_radians(degrees):
         return degrees * math.pi / 180
 
-    radius_earth = 6.371E3   # km
+    radius_earth = 6.371E3 # km
     phi1 = convert_to_radians(point1[0])
     phi2 = convert_to_radians(point2[0])
+
     delta_phi = convert_to_radians(point1[0] - point2[0])
     delta_lam = convert_to_radians(point1[1] - point2[1])
 
-    a = math.sin(0.5 * delta_phi)**2 + math.cos(phi1)\
-        * math.sin(0.5 * delta_lam)**2
+    a = math.sin(0.5 * delta_phi)**2 + math.cos(phi1) * math.cos(phi2) * math.sin(0.5 * delta_lam)**2
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-
-    return radius_earth * c / 1.60934  # convert km to miles
+    return radius_earth * c / 1.60934 # convert km to miles
 
 
 def import_cities():
@@ -69,17 +67,24 @@ def populate_edges(cd, cities):
     g = Graph()
     for index, city in enumerate(cities):
         airport = city['airport']
-        for destination_airport in city['destination_airports']:
-            print('destination_airports: {}'.format(destination_airport))
+        for index2, dest_airport in enumerate(city['destination_airports']):
+
             # import pdb; pdb.set_trace()
-            distance = calculate_distance(cd[airport], cd[destination_airport])
-            g.add_edge(airport, destination_airport, distance)
+            try:
+                distance = calculate_distance(cd[airport],
+                                              cd[dest_airport])
+                print('Index: {} Airport: {} Destination_airports:'
+                      ' {} Distance: {}'
+                      .format(city['city'], index, dest_airport, distance))
+                g.add_edge(airport, dest_airport, distance)
+            except KeyError:
+                pass
 
     return g
 
 
 if __name__ == "__main__":
-    # cities = import_cities()
-    # g = populate_city_nodes(cities)
-    # g = populate_edges(g, cities)
+    cities = import_cities()
+    cd = populate_city_dict(cities)
+    g = populate_edges(cd, cities)
     print('stockholm')

@@ -79,7 +79,7 @@ def test_populate_city_graph_exists():
 def test_city_dict(cd):
     '''test that the weighted graph city nodes are beeing populated'''
     # import pdb; pdb.set_trace()
-    assert d == {'Uruapan International Airport': [19.39667, -102.03917],
+    assert cd == {'Uruapan International Airport': [19.39667, -102.03917],
                  'Stockholm-Bromma Airport': [59.35444, 17.93972]}
 
 
@@ -91,19 +91,7 @@ def test_destination_edges_exitsts():
 def test_populate_edges_adds_edges(edges):
     '''test populate adds edges to weighted graph'''
     # import pdb; pdb.set_trace()
-    assert edges.graph == {'Stockholm-Bromma Airport': {1: 42, 2: 42},
-                           'Ponciano Arriaga International Airport': {1: 42, 2: 42}
-                           }
-
-
-
-
-
-
-
-
-
-
-
-
-#
+    assert edges.graph == {'Stockholm-Bromma Airport':
+    {'Uruapan International Airport': 6038.31006865406},
+    'Uruapan International Airport':
+    {'Stockholm-Bromma Airport': 6038.31006865406}}
