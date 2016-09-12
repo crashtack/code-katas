@@ -94,7 +94,9 @@ def test_city_dict(cd):
     '''test that the weighted graph city nodes are beeing populated'''
     # import pdb; pdb.set_trace()
     assert cd == {'Uruapan International Airport': [19.39667, -102.03917],
-                 'Stockholm-Bromma Airport': [59.35444, 17.93972]}
+                  'Stockholm-Bromma Airport': [59.35444, 17.93972],
+                  'Sir Seewoosagur Ramgoolam International Airport':
+                  [-20.4300278, 57.6830222]}
 
 
 def test_destination_edges_exitsts():
@@ -104,8 +106,23 @@ def test_destination_edges_exitsts():
 
 def test_populate_edges_adds_edges(edges):
     '''test populate adds edges to weighted graph'''
-    import pdb; pdb.set_trace()
-    assert edges.graph == {'Stockholm-Bromma Airport':
-    {'Uruapan International Airport': 6038.31006865406},
-    'Uruapan International Airport':
-    {'Stockholm-Bromma Airport': 6038.31006865406}}
+    # import pdb; pdb.set_trace()
+    assert edges.graph['Stockholm-Bromma Airport'] == \
+        {'Uruapan International Airport': 6038.31006865406,
+         'Sir Seewoosagur Ramgoolam International Airport': 5953.091902707217}
+
+
+def test_populate_edges_adds_edges2(edges):
+    '''test populate adds edges to weighted graph'''
+    # import pdb; pdb.set_trace()
+    assert edges.graph['Uruapan International Airport'] == \
+        {'Stockholm-Bromma Airport': 6038.31006865406,
+         'Sir Seewoosagur Ramgoolam International Airport': 11118.432528477942}
+
+
+def test_populate_edges_adds_edges3(edges):
+    '''test populate adds edges to weighted graph'''
+    # import pdb; pdb.set_trace()
+    assert edges.graph['Sir Seewoosagur Ramgoolam International Airport'] == \
+        {'Stockholm-Bromma Airport': 5953.091902707217,
+         'Uruapan International Airport': 11118.432528477942}
