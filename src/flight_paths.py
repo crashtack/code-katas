@@ -8,8 +8,8 @@ def import_cities():
         Import the city flight connection path JSON file,
         Returns dictionary of cities
     '''
-    url = 'cities_with_airports.json'
-    # url = 'https://codefellows.github.io/sea-python-401d4/_downloads/cities_with_airports.json'
+    # url = 'cities_with_airports.json'
+    url = 'https://codefellows.github.io/sea-python-401d4/_downloads/cities_with_airports.json'
     r = requests.get(url)
     cities = r.json()   # converts json to dictionary
     return cities
@@ -58,7 +58,7 @@ def populate_edges(cd, cities):
 if __name__ == "__main__":
     start_city = sys.argv[1]
     dest_city = sys.argv[2]
-    print('sys.argv {}'.format(sys.argv))
+    # print('sys.argv {}'.format(sys.argv))
     # start_city = 'Seattle'
     # dest_city = 'Perth'
 
@@ -69,15 +69,12 @@ if __name__ == "__main__":
     start_airport = None
     dest_airport = None
     for node in g:
-        print(node)
         if start_city in node:
-            print(node)
             start_airport = node
         if start_airport is None:
             raise NameError("Starting City not found")
 
         if dest_city in node:
-            print(node)
             dest_airport = node
         if dest_airport is None:
             raise NameError("Destination City not found")
