@@ -2,16 +2,26 @@ import requests
 from graph import Graph
 from distance import calculate_distance
 import sys
+import os
+from io import open
+import json
 
 def import_cities():
     '''
         Import the city flight connection path JSON file,
         Returns dictionary of cities
     '''
-    # url = 'cities_with_airports.json'
-    url = 'https://codefellows.github.io/sea-python-401d4/_downloads/cities_with_airports.json'
-    r = requests.get(url)
-    cities = r.json()   # converts json to dictionary
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    filename = 'cities_with_airports.json'
+    path = os.path.join(BASE_DIR, filename)
+    print('path: {}'.format(path))
+    # url = 'https://codefellows.github.io/sea-python-401d4/_downloads/cities_with_airports.json'
+    # r = requests.get(url)
+
+    with open(path, 'r') as fh:
+        data = fh.read()
+
+    cities = json.loads(data)   # converts json to dictionary
     return cities
 
 
