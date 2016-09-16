@@ -140,3 +140,8 @@ def test_shortest_path():
                }
     g = Graph(initial)
     assert g.shortest_path(1, 7) == ([1, 2, 4, 7], 20)
+
+
+def test_shortest_flight_path(edges):
+    '''shortest path between 2 airports'''
+    assert edges.shortest_path('Stockholm-Bromma Airport', 'Sir Seewoosagur Ramgoolam International Airport') == []
