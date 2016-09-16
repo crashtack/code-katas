@@ -116,6 +116,34 @@ class Graph(object):
         q = Queue()
         return self._traverse(start_node, q.enqueue, q.dequeue, q.size)
 
+    def shortest_path(self, start, end):
+        """Justin's Dijksta's algorith"""
+        distance = {start: 0}
+        unvisited = set(self.nodes())
+        parents = {}
+
+        while end in unvisited:
+            current = min((weight, n)
+                          for n, weight in distance.items()
+                          if n in unvisited)[1]
+            for neighbor in self.neighbors(current):
+                weight = self.graph[current][neighbor] + distance[current]
+                dist = distance.setdefault(neighbor, weight)
+                if weight <= dist:
+                    distance[neighbor] = weight
+                    parents[neighbor] = current
+            unvisited.remove(current)
+
+        s = []
+        weight = 0
+        current = end
+        while current in parents:
+            s.append(current)
+            weight += self.graph[parents[current]][current]
+            current = parents[current]
+        s.append(start)
+        return s[::-1], weight
+
 
 if __name__ == '__main__':
     from datetime import datetime

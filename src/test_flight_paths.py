@@ -126,3 +126,17 @@ def test_populate_edges_adds_edges3(edges):
     assert edges.graph['Sir Seewoosagur Ramgoolam International Airport'] == \
         {'Stockholm-Bromma Airport': 5953.091902707217,
          'Uruapan International Airport': 11118.432528477942}
+
+
+def test_shortest_path():
+    from graph import Graph
+    initial = {1: {2: 10, 3: 20, 4: 50},
+               2: {3: 25, 4: 7, 6: 25},
+               3: {},
+               4: {3: 2, 5: 24, 7: 3},
+               5: {2: 1, 6: 4, 7: 12},
+               6: {},
+               7: {2: 1},
+               }
+    g = Graph(initial)
+    assert g.shortest_path(1, 7) == ([1, 2, 4, 7], 20)

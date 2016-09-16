@@ -60,5 +60,5 @@ if __name__ == "__main__":
     cd = populate_city_dict(cities)
     g = populate_edges(cd, cities)
     for node in g:
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         print(node)
