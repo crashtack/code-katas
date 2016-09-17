@@ -144,4 +144,4 @@ def test_shortest_path():
 
 def test_shortest_flight_path(edges):
     '''shortest path between 2 airports'''
-    assert edges.shortest_path('Stockholm-Bromma Airport', 'Sir Seewoosagur Ramgoolam International Airport') == []
+    assert edges.shortest_path('Stockholm-Bromma Airport', 'Sir Seewoosagur Ramgoolam International Airport') == (['Stockholm-Bromma Airport', 'Sir Seewoosagur Ramgoolam International Airport'], 5953.091902707217)

@@ -1,4 +1,3 @@
-import requests
 from graph import Graph
 from distance import calculate_distance
 import sys
