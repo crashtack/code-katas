@@ -33,12 +33,12 @@ class Node(object):
     def in_order(self):
         '''recursive in order traversal'''
         if self.left:
-            for item in self.left.in_order():
-                yield item
-        yield self.value
+            for node in self.left.in_order():
+                yield node
+        yield self
         if self.right:
-            for item in self.right.in_order():
-                yield item
+            for node in self.right.in_order():
+                yield node
 
     def post_order(self):
         '''recursive post order traversal'''
@@ -149,10 +149,10 @@ class BST(object):
 
         return depth_left - depth_right
 
-    def _traverse(self, add, remove, _size):
+    def _traverse(self, add, remove, size):
         '''Traverse function
             takes in other functions and a start_node'''
-        while _size():
+        while size():
             x = remove()
             if x:
                 add(x.left, x.right)
@@ -169,7 +169,7 @@ class BST(object):
             q.enqueue(a)
             q.enqueue(b)
 
-        return self._traverse(add, q.dequeue, q._size)
+        return self._traverse(add, q.dequeue, q.size)
 
     def pre_order(self):
         '''perform a breadth first traversal, returns a list of
@@ -181,11 +181,10 @@ class BST(object):
         def add(a, b):
             s.push(b)
             s.push(a)
-        return self._traverse(add, s.pop, s._size)
+        return self._traverse(add, s.pop, s.size)
 
     def in_order(self):
-        '''Traverse function
-            takes in other functions and a start_node'''
+        '''in_order travers function'''
         if self.root:
             return self.root.in_order()
         else:

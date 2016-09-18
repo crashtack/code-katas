@@ -2,7 +2,7 @@ import os
 from bst import BST
 import json
 from io import open
-
+import sys
 
 def import_data():
     '''
@@ -38,22 +38,37 @@ def populate_bst(dic):
     tree = BST()
     for bil in dic:
         # import pdb; pdb.set_trace()
-        print(bil, end=', ')
         tree.insert(bil, dic[bil])
+
     return tree
 
 
 def return_oldest(bst):
     '''return the oldest billinare under 80 and the youngest'''
-    pass
+    youngest = bst.root
+    oldest = bst.root
+
+    for node in bst.in_order():
+        if node.data['age'] > oldest.data['age'] and node.data['age'] < 80:
+            oldest = node
+        if node.data['age'] < youngest.data['age'] and node.data['age'] > 0:
+            youngest = node
+
+    print('\n\nYoungest: {:16} Age: {:2} Net Worth: ${:,} Industry: {}'
+          .format(youngest.data['name'], youngest.data['age'],
+                  youngest.data['net_worth'], youngest.data['source']))
+    print('Oldest  : {:16} Age: {:2} Net Worth: ${:,} Industry: {}'
+          .format(oldest.data['name'], oldest.data['age'],
+                  oldest.data['net_worth'], oldest.data['source']))
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        print('hello world')
-    elif sys.argv[1] == '--help':
-        print('this is your helper string')
-    else:
-        data = import_data()
-        dic = populate_dict(data)
-        bst = populate_bst(dic)
+    # if len(sys.argv) == 1:
+    #     print('hello world')
+    # if sys.argv[1] == '--help':
+        # print('this is your helper string')
+    # else:
+    data = import_data()
+    dic = populate_dict(data)
+    bst = populate_bst(dic)
+    return_oldest(bst)
