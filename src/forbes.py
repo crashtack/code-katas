@@ -62,6 +62,44 @@ def return_oldest(bst):
                   oldest.data['net_worth'], oldest.data['source']))
 
 
+def get_stock_price():
+    '''
+        A function to get the price of a companies sock.
+        Use http://dev.markitondemand.com/MODApis/ API.
+        Search for the retrieve the company stock ticker.
+        http://dev.markitondemand.com/MODApis/Api/Lookup/json?input=FACEBOOK
+        returns:
+            ```
+            [
+                {
+                Symbol: "FB",
+                Name: "Facebook, Inc.",
+                Exchange: "NASDAQ"
+                }
+            ]
+        Then use to get the price info: http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=FB
+        returns:
+            {
+                Status: "SUCCESS",
+                Name: "Facebook, Inc.",
+                Symbol: "FB",
+                LastPrice: 129.36,
+                Change: 0.29000000000002,
+                ChangePercent: 0.22468427984816,
+                Timestamp: "Mon Sep 19 11:44:26 UTC-04:00 2016",
+                MSDate: 42632.4891898148,
+                MarketCap: 371478455040,
+                Volume: 512712,
+                ChangeYTD: 104.66,
+                ChangePercentYTD: 23.6002293139691,
+                High: 129.91,
+                Low: 128.83,
+                Open: 129.91
+            }
+    '''
+    pass
+
+
 if __name__ == "__main__":
     # if len(sys.argv) == 1:
     #     print('hello world')
