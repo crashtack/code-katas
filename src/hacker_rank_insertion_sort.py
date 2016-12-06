@@ -4,11 +4,17 @@ def insertion_sort(arr):
     except IndexError:
         return []
 
-    for i in range(1, len(arr) + 1):
-        if value < arr[-(i + 1)]:
-            arr[-i] = arr[-(i + 1)]
+    for i in range(len(arr) - 1, 0, -1):
+        if i == 1 and value < arr[i - 1]:
+            arr[1] = arr[0]
+            a = [print(arr[x], end=' ') for x in range(len(arr))]
+            print()
+            arr[0] = value
+            break
+        elif value < arr[i - 1]:
+            arr[i] = arr[i - 1]
         else:
-            arr[-i] = value
+            arr[i] = value
             break
         a = [print(arr[x], end=' ') for x in range(len(arr))]
         print()
