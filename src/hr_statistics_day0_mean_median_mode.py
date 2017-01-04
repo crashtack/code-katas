@@ -5,7 +5,7 @@ def mean(lst):
     for i in lst:
         total += i
     result = total / len(lst)
-    return result
+    return float('{:0.1f}'.format(result))
 
 
 def median(lst):
@@ -21,20 +21,38 @@ def median(lst):
             output = lst[int(len(lst) / 2)]
 
     output = float('{:0.1f}'.format(output))
-    print(output)
     return output
 
 
-def mode():
+def mode(lst):
     """Return the mode of a list"""
-    pass
+    lst.sort()
+    mode_ = None
+    max_count = 0
+    count = 1
+    last = None
+    for i in lst:
+        if i == last:
+            count += 1
+        else:
+            count = 1
+        if count > max_count:
+            mode_ = i
+        max_count = max(max_count, count)
+        last = i
+        count = 1
+
+    return mode_
 
 
 if __name__ == "__main__":
+    input()
     n = input().strip()
-    n = n.split(',')
-    print(n)
+    n = n.split(' ')
     lst = []
     for i in n:
         lst.append(int(i))
-    median(lst)
+
+    print(mean(lst))
+    print(median(lst))
+    print(mode(lst))
