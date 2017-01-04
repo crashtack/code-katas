@@ -22,7 +22,7 @@ def test_consecutive_ones(arr, result, consecutive):
 
 
 def test_stack_size():
-    from stack import Stack
+    from hr_day10_binary import Stack
     st = Stack()
     assert st.size() == 0
     st.push(2)
@@ -31,3 +31,13 @@ def test_stack_size():
     st.pop()
     assert st.size() == 1
     assert st.pop() == 2
+
+
+def test_stack_push():
+    from hr_day10_binary import Stack
+    st = Stack()
+    st.push(1)
+    st.push(2)
+    st.push(3)
+    assert st.size() == 3
+    assert st.pop() == 3
