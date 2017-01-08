@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/crashtack/code-katas.svg?branch=codewars)](https://travis-ci.org/crashtack/code-katas)
 
-# code-katas
+# code-katas, whiteboard challenges,etc.
 ## Codewars Code-Kata code
 ## Hacker Rank code
 
