@@ -40,6 +40,23 @@
         # find availability for user and dates
         1,"12/16/2015","01/15/2016"
 """
+import calendar
+
+
+def day_index(date):
+    """
+        Returns the day of the week index given a data ("12/31/2017")
+        based on Sunday = index 0
+    """
+    date_list = date.split('/')
+    month = int(date_list[0])
+    day = int(date_list[1])
+    year = int(date_list[2])
+
+    index = calendar.weekday(year, month, day)
+
+    index = (index + 1) % 7
+    return index
 
 
 def return_availabile(data, hours, employee, start, stop):
@@ -64,4 +81,3 @@ def return_availabile(data, hours, employee, start, stop):
 
         hour format: [0, 8, 8, 8, 8, 8, 0]
     """
-    

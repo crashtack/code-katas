@@ -1,5 +1,5 @@
 import pytest
-from find_availablity import return_availabile, day_index
+from find_availability import return_availabile, day_index
 
 DATA = {
     "1": {
