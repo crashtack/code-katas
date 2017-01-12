@@ -41,6 +41,7 @@
         1,"12/16/2015","01/15/2016"
 """
 import calendar
+import datetime
 
 
 def day_index(date):
@@ -59,6 +60,18 @@ def day_index(date):
     return index
 
 
+def date_object(date):
+    """
+        Returns a datetime.date() object based on the inputed date string
+    """
+    date_list = date.split('/')
+    month = int(date_list[0])
+    day = int(date_list[1])
+    year = int(date_list[2])
+
+    return datetime.date(year, month, day)
+
+
 def return_availabile(data, hours, employee, start, stop):
     """
         Return a list of avalible work hours for the given the
@@ -66,18 +79,26 @@ def return_availabile(data, hours, employee, start, stop):
         and standard hours.
 
         data format:
-        { "1": {"name": "Mark Virtue",
-                "avalability": [
-                                ["01/01/2015", "12/31/2015", [0,4,4,8,8,4,0]],
-                                ["01/01/2016", None, [0,8,8,8,0,0]],
-                               ],
-               },
-          "2": {"name": "Anne Prins",
-                "avalability": [
-                                ["01/01/2015", "12/31/2015", [0,4,4,8,8,4,0]],
-                               ],
-               },
-        }
+            {
+                "1": {
+                    "name": "Mark Virtue",
+                    "availability": [
+                        ["01/01/2015", "12/31/2015", [0, 4, 4, 8, 8, 4, 0]],
+                        ["01/01/2016", None, [0, 8, 8, 8, 0, 0]],
+                    ],
+                },
+                "2": {
+                    "name": "Anne Prins",
+                    "availability": [
+                        ["01/01/2015", "12/31/2015", [0, 4, 4, 8, 8, 4, 0]],
+                    ],
+                },
+            }
 
         hour format: [0, 8, 8, 8, 8, 8, 0]
     """
+    start = date_object(start)
+    stop = date_object(stop)
+
+    availability = data[employee]["availability"]
+    print(availability)
