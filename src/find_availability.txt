@@ -16,7 +16,7 @@
 2,"03/16/2016","06/16/2016",[0,8,8,8,8,0,0]
 
 # fred's availability
-3,"01/01/2017", null, null
+3,"01/01/2017",null,null
 
 # find availability for user and dates
 1,"12/16/2015","01/15/2016"
