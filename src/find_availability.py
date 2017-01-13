@@ -92,7 +92,6 @@ def availabile_list(avail_list, start, stop):
             ["01/01/2015", "12/31/2015", [0, 4, 4, 4, 4, 4, 0]],
             ["01/01/2016", None, [0, 8, 8, 8, 8, 8, 0]],
         ]
-        TODO: Check for company holiday
     """
     start = date_object(start)
     stop = date_object(stop)
@@ -164,7 +163,7 @@ def formated_schedual(line, company_hours):
 def find_availabile_work_hours(employee_id, start, stop):
     """
         Format the input file into a dictionary containing the
-        employee availibility information and print availible
+        employee availability information and print available
         hours based on input employee_id, start, and stop
         after calling availabile_list() function.
 
@@ -223,7 +222,7 @@ def find_availabile_work_hours(employee_id, start, stop):
     output = []
     for i in availabile_list(avail, start, stop):
         print(i)
-        output.append(i)     # building output list inorder to test output
+        output.append(i)     # building output list for testablility
 
     return output
 
