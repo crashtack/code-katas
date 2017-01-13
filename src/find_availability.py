@@ -74,6 +74,12 @@ def company_holiday(date):
         Return True if date is a company holiday
         else return False
     """
+    holidays = ["01/01/2015", "01/01/2016", "01/01/2017",
+                "12/25/2015", "12/25/2016", "12/25/2017"]
+    for i in holidays:
+        if date_object(i) == date:
+            return True
+
     return False
 
 
@@ -101,42 +107,66 @@ def availabile_list(avail_list, start, stop):
                 current.month,
                 current.day,
                 current.year))
-            continue
+        else:
+            for element in avail_list:
+                emp_start = date_object(element[0])
 
-        for element in avail_list:
-            emp_start = date_object(element[0])
+                # Handling the None end date in avail_list
+                if element[1]:
+                    emp_stop = date_object(element[1])
+                else:
+                    emp_stop = stop
 
-            # Handling the None end date in avail_list
-            if element[1]:
-                emp_stop = date_object(element[1])
-            else:
-                emp_stop = stop
+                if emp_start <= current and emp_stop >= current:
+                    result.append('"{:02d}/{:02d}/{}",{}'.format(
+                        current.month,
+                        current.day,
+                        current.year,
+                        element[2][day_index(current)]))
+                    found = True
 
-            if emp_start <= current and emp_stop >= current:
-                result.append('"{:02d}/{:02d}/{}",{}'.format(
-                    current.month,
-                    current.day,
-                    current.year,
-                    element[2][day_index(current)]))
-                found = True
-
-        if found is False:
-                result.append('"{:02d}/{:02d}/{}",0'.format(
-                    current.month,
-                    current.day,
-                    current.year))
+            if found is False:
+                    result.append('"{:02d}/{:02d}/{}",0'.format(
+                        current.month,
+                        current.day,
+                        current.year))
 
         current += datetime.timedelta(days=1)
 
     return result
 
 
-def find_available_work_hours(employee_id, start, stop):
+def formated_schedual(line, company_hours):
+    """
+        Parse and return the schedual information
+        set the available hours to company_hours if no override is provided
+    """
+    line = line.rstrip('\n').split(',', maxsplit=3)
+    start = line[1].strip("'").strip('"')
+    schedual = []
+
+    if line[2] == 'null':
+        stop = None
+    else:
+        stop = line[2].strip("'").strip('"')
+
+    if line[3] == 'null':
+        schedual = company_hours
+    else:
+        temp = line[3].strip("[").strip("]")
+        temp = temp.split(',')
+        for i in temp:
+            schedual.append(int(i))
+
+    return [start, stop, schedual]
+
+
+def find_availabile_work_hours(employee_id, start, stop):
     """
         Format the input file into a dictionary containing the
         employee availibility information and print availible
         hours based on input employee_id, start, and stop
-        date after calling availabile_list() function.
+        after calling availabile_list() function.
 
         data format:
             {
@@ -155,4 +185,48 @@ def find_available_work_hours(employee_id, start, stop):
                 },
             }
     """
-    pass
+    filename = "find_availability.txt"
+    employee_data = {}
+    company_hours = []
+    current = 0
+    emp_num = 0
+
+    with open(filename, 'r') as fh:
+        all_lines = fh.readlines()
+
+    for index, line in enumerate(all_lines):
+        if line.startswith(('\n', '#')):
+            pass
+        else:
+            temp = line.split(',')
+            current = index
+            for i in temp:
+                company_hours.append(int(i.rstrip('\n')))
+            break
+
+    for line in all_lines[current + 1:]:
+        if line.startswith(('\n', '#')):
+            continue
+        else:
+            temp = line.split(',', maxsplit=4)
+            if int(temp[0]) > emp_num:
+                employee_data[temp[0]] = {"name": temp[1], "availability": []}
+                emp_num += 1
+            else:
+                if len(temp) > 3:
+                    employee_data[temp[0]]["availability"] \
+                        .append(formated_schedual(line, company_hours))
+
+    employee_id = str(employee_id)
+    avail = employee_data[employee_id]["availability"]
+
+    output = []
+    for i in availabile_list(avail, start, stop):
+        print(i)
+        output.append(i)     # building output list inorder to test output
+
+    return output
+
+
+if __name__ == "__main__":
+    find_availabile_work_hours(1, "12/06/2015", "12/09/2015")
