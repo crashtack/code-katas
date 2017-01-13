@@ -4,6 +4,7 @@ import json
 from io import open
 import sys
 
+
 def import_data():
     '''
         importing the data from file,

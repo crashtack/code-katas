@@ -131,12 +131,12 @@ def availabile_list(avail_list, start, stop):
     return result
 
 
-def find_available_work_hours(employee_id, start, stop):
+def find_availabile_work_hours(employee_id, start, stop):
     """
         Format the input file into a dictionary containing the
         employee availibility information and print availible
         hours based on input employee_id, start, and stop
-        date after calling availabile_list() function.
+        after calling availabile_list() function.
 
         data format:
             {
@@ -155,4 +155,47 @@ def find_available_work_hours(employee_id, start, stop):
                 },
             }
     """
+    filename = "find_availability.txt"
+    employee_data = {}
+    company_hours = []
+    current = 0
+    emp_num = 0
+
+    with open(filename, 'r') as fh:
+        all_lines = fh.readlines()
+
+    for index, line in enumerate(all_lines):
+        if line.startswith(('\n', '#')):
+            pass
+        else:
+            temp = line.split(',')
+            current = index
+            for i in temp:
+                company_hours.append(int(i.rstrip('\n')))
+            break
+    print("company_hours: {}".format(company_hours))
+    print("current: {}".format(current))
+    for line in all_lines[current + 1:]:
+        # print("line: {}".format(line))
+        if line.startswith(('\n', '#')):
+            continue
+        else:
+            temp = line.split(',')
+            if int(temp[0]) > emp_num:
+                employee_data[temp[0]] = {"name": temp[1], "availability": []}
+                emp_num += 1
+            else:
+                print(line)
+                print(employee_data)
+                employee_data[temp[0]]["availability"].append(line)
+
+
+        print(line)
+
+
+def formated_schedual(line):
     pass
+
+
+if __name__ == "__main__":
+    find_availabile_work_hours(1, "12/06/2015", "12/09/2015")
