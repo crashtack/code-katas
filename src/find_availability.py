@@ -69,6 +69,14 @@ def date_object(date):
     return datetime.date(year, month, day)
 
 
+def company_holiday(date):
+    """
+        Return True if date is a company holiday
+        else return False
+    """
+    return False
+
+
 def availabile_list(avail_list, start, stop):
     """
         Return a list of avalible work hours for the given
@@ -87,6 +95,13 @@ def availabile_list(avail_list, start, stop):
 
     while current <= stop:
         found = False
+
+        if company_holiday(current):
+            result.append('"{:02d}/{:02d}/{}",0'.format(
+                current.month,
+                current.day,
+                current.year))
+            continue
 
         for element in avail_list:
             emp_start = date_object(element[0])
