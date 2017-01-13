@@ -1,12 +1,12 @@
 import pytest
-from find_availability import return_availabile, day_index, date_object
+from find_availability import availabile_list, day_index, date_object
 
 DATA = {
     "1": {
         "name": "Mark Virtue",
         "availability": [
-            ["01/01/2015", "12/31/2015", [0, 4, 4, 8, 8, 4, 0]],
-            ["01/01/2016", None, [0, 8, 8, 8, 0, 0]],
+            ["01/01/2015", "12/31/2015", [0, 4, 4, 4, 4, 4, 0]],
+            ["01/01/2016", None, [0, 8, 8, 8, 8, 8, 0]],
         ],
     },
     "2": {
@@ -17,18 +17,32 @@ DATA = {
     },
 }
 
+AVAIL_LIST = [
+    ["01/01/2015", "12/31/2015", [0, 4, 4, 4, 4, 4, 0]],
+    ["01/01/2016", None, [0, 8, 8, 8, 8, 8, 0]],
+]
+
 
 TABLE1 = [
-    (DATA, "1", "12/06/2015", "12/09/2015", [["12/06/2015", 0],
-                                           ["12/07/2015", 4],
-                                           ["12/08/2015", 4],
-                                           ["12/09/2015", 8]]),
+    (AVAIL_LIST, "12/06/2015", "12/09/2015", ['"12/06/2015",0',
+                                              '"12/07/2015",4',
+                                              '"12/08/2015",4',
+                                              '"12/09/2015",4']),
+    (AVAIL_LIST, "01/01/2014", "01/04/2014", ['"01/01/2014",0',
+                                              '"01/02/2014",0',
+                                              '"01/03/2014",0',
+                                              '"01/04/2014",0']),
+    (AVAIL_LIST, "12/29/2015", "01/02/2016", ['"12/29/2015",4',
+                                              '"12/30/2015",4',
+                                              '"12/31/2015",4',
+                                              '"01/01/2016",8',
+                                              '"01/02/2016",0']),
 ]
 
 TABLE2 = [
-    ("01/11/2017", 3),
-    ("12/06/2015", 0),
-    ("12/05/2015", 6),
+    (date_object("01/11/2017"), 3),
+    (date_object("12/06/2015"), 0),
+    (date_object("12/05/2015"), 6),
 ]
 
 TABLE3 = [
@@ -38,12 +52,11 @@ TABLE3 = [
 ]
 
 
-@pytest.mark.parametrize('data, employee, start, stop, result', TABLE1)
-def test_return_available(data, employee, start, stop, result):
+@pytest.mark.parametrize('data, start, stop, result', TABLE1)
+def test_return_available(data, start, stop, result):
     """Test that return_availabile returns the correct
        list of availible work hours"""
-    hours = [0, 8, 8, 8, 8, 8, 0]
-    assert return_availabile(data, hours, employee, start, stop) == result
+    assert availabile_list(data, start, stop) == result
 
 
 @pytest.mark.parametrize('date, index', TABLE2)
