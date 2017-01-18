@@ -17,7 +17,7 @@ if __name__ == "__main__":
     input()
 
     n1 = input().strip()
-    import pdb; pdb.set_trace()
+    # import pdb; pdb.set_trace()
     n1 = n1.split(' ')
     lst = []
     for i in n1:
