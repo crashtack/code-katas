@@ -56,14 +56,12 @@ def test_include():
 def test_init_size():
     """Test initial size."""
     bst = BST()
-    # import pdb; pdb.set_trace()
-    assert bst.size == 0
+    assert bst.size() == 0
 
 
 def test_init_root():
     """Test BST initialize root as None."""
     bst = BST()
-    # import pdb; pdb.set_trace()
     assert bst.root is None
 
 
@@ -71,7 +69,7 @@ def test_insert_size():
     """Test size increments on insert."""
     bst = BST()
     bst.insert(1)
-    assert bst.size == 1
+    assert bst.size() == 1
 
 
 def test_insert_value():
@@ -79,7 +77,6 @@ def test_insert_value():
     bst = BST()
     bst.insert(4)
     bst.insert(2)
-    # import pdb; pdb.set_trace()
     assert bst.root.left.key == 2
 
 
@@ -97,7 +94,7 @@ def test_insert3_check_size():
     bst.insert(4)
     bst.insert(2)
     bst.insert(3)
-    assert bst.size == 3
+    assert bst.size() == 3
 
 
 def test_insert3_right():
@@ -147,6 +144,19 @@ def test_contains_false(known_bst):
 def test_contains_false_2(known_bst):
     """Check to see if 6 is not in the test bst."""
     assert known_bst[0].contains(15) is False
+
+
+def test_size_empty(known_bst):
+    """Check to see if 6 is not in the test bst."""
+    bst = BST()
+    assert bst.size() == 0
+
+
+def test_size_1():
+    """Check to see if 6 is not in the test bst."""
+    bst = BST()
+    bst.insert(23)
+    assert bst.size() == 1
 
 
 # def test_depth(known_bst):

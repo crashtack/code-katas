@@ -42,7 +42,7 @@ class BST(object):
     def __init__(self):
         """ Initialize an empty BST """
         self.root = None
-        self.size = 0
+        self._size = 0
         self.depth = 0
 
     def insert(self, key, value=None):
@@ -52,7 +52,7 @@ class BST(object):
             self.root = new_node
         else:
             self.root.insert(new_node)
-        self.size += 1
+        self._size += 1
 
     def contains(self, key):
         """ Returns True if BST contains given key """
@@ -66,3 +66,7 @@ class BST(object):
                 current = current.left
             elif key > current.key:
                 current = current.right
+
+    def size(self):
+        """ Returns the number of nodes in the BST """
+        return self._size
