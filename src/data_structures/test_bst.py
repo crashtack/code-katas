@@ -55,86 +55,105 @@ def test_include():
 
 def test_init_size():
     """Test initial size."""
-    from bst import BST
     bst = BST()
     # import pdb; pdb.set_trace()
     assert bst.size == 0
 
-#
-# def test_init_root():
-#     """Test BST initialize root as None."""
-#     from bst import BST
-#     bst = BST()
-#     # import pdb; pdb.set_trace()
-#     assert bst.root is None
-#
-#
-# def test_insert_size():
-#     """Test size increments on insert."""
-#     from bst import BST
-#     bst = BST()
-#     bst.insert(1)
-#     assert bst.size == 1
-#
-#
-# def test_insert_value():
-#     """Test that an inserted node has correct value."""
-#     from bst import BST
-#     bst = BST()
-#     bst.insert(4)
-#     bst.insert(2)
-#     assert bst.root.left.value == 2
-#
-#
-# def test_insert_right_node_None():
-#     """Test to see if inserted node does not change other node."""
-#     from bst import BST
-#     bst = BST()
-#     bst.insert(4)
-#     bst.insert(2)
-#     assert bst.root.right is None
-#
-#
-# def test_insert_second_depth_level():
-#     """Test to see if inserted node goes to the correct place."""
-#     from bst import BST
-#     bst = BST()
-#     bst.insert(4)
-#     bst.insert(2)
-#     bst.insert(3)
-#     assert bst.root.left.right.value == 3
-#
-#
-# def test_insert_check_size():
-#     """Check to see if size is correct after several inserts."""
-#     from bst import BST
-#     bst = BST()
-#     bst.insert(4)
-#     bst.insert(2)
-#     bst.insert(3)
-#     assert bst.size == 3
-#
-#
-# def test_coontains(known_bst):
-#     """Check to see if 7 is in the test bst."""
-#     assert known_bst[0].contains(7) is True
-#
-#
-# def test_coontains_false(known_bst):
-#     """Check to see if 6 is not in the test bst."""
-#     assert known_bst[0].contains(6) is False
-#
-#
-# def test_coontains_false_2(known_bst):
-#     """Check to see if 6 is not in the test bst."""
-#     assert known_bst[0].contains(15) is False
-#
-#
-# def test_depth(known_bst):
-#     """check the depth of the left branch"""
-#     assert known_bst[0].depth() == 3
-#
-#
+
+def test_init_root():
+    """Test BST initialize root as None."""
+    bst = BST()
+    # import pdb; pdb.set_trace()
+    assert bst.root is None
+
+
+def test_insert_size():
+    """Test size increments on insert."""
+    bst = BST()
+    bst.insert(1)
+    assert bst.size == 1
+
+
+def test_insert_value():
+    """Test that an inserted node has correct value."""
+    bst = BST()
+    bst.insert(4)
+    bst.insert(2)
+    # import pdb; pdb.set_trace()
+    assert bst.root.left.key == 2
+
+
+def test_insert_right_node_None():
+    """Test to see if inserted node does not change other node."""
+    bst = BST()
+    bst.insert(4)
+    bst.insert(2)
+    assert bst.root.right is None
+
+
+def test_insert3_check_size():
+    """Check to see if size is correct after several inserts."""
+    bst = BST()
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(3)
+    assert bst.size == 3
+
+
+def test_insert3_right():
+    """Check the right node"""
+    bst = BST()
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(5, 12345)
+    assert bst.root.right.key == 5
+    assert bst.root.right.value == 12345
+
+
+def test_insert3_left():
+    """Check the right node"""
+    bst = BST()
+    bst.insert(4)
+    bst.insert(2)
+    bst.insert(5)
+    assert bst.root.left.key == 2
+
+
+def test_contains_root(known_bst):
+    """Check the known_bst root"""
+    assert known_bst[0].contains(5) is True
+
+
+def test_contains_right_right(known_bst):
+    """Check to see if 7 is in the test bst."""
+    assert known_bst[0].contains(9) is True
+
+
+def test_contains_right_left(known_bst):
+    """Check to see if 7 is in the test bst."""
+    assert known_bst[0].contains(7) is True
+
+
+def test_contains_left(known_bst):
+    """Check to see if 7 is in the test bst."""
+    assert known_bst[0].contains(4) is True
+
+
+def test_contains_false(known_bst):
+    """Check to see if 6 is not in the test bst."""
+    assert known_bst[0].contains(6) is False
+
+
+def test_contains_false_2(known_bst):
+    """Check to see if 6 is not in the test bst."""
+    assert known_bst[0].contains(15) is False
+
+
+def test_depth(known_bst):
+    """check the depth of the left branch"""
+    assert known_bst[0].depth() == 3
+
+
 # def test_depth_empty():
 #     """check the depth of an empty graph"""
 #     bst = BST()

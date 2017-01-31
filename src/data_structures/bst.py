@@ -46,8 +46,22 @@ class BST(object):
 
     def insert(self, key, value=None):
         """ Create a new node with the given key and value """
+        new_node = Node(key, value)
         if self.root is None:
-            self.root = Node(key, value)
+            self.root = new_node
         else:
-            self.root.insert(key, value)
+            self.root.insert(new_node)
         self.size += 1
+
+    def contains(self, key):
+        """ Returns True if BST contains given key """
+        current = self.root
+        while True:
+            if current is None:
+                return False
+            elif key == current.key:
+                return True
+            elif key < current.key:
+                current = current.left
+            elif key > current.key:
+                current = current.right
