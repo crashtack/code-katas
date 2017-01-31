@@ -43,6 +43,7 @@ class BST(object):
         """ Initialize an empty BST """
         self.root = None
         self.size = 0
+        self.depth = 0
 
     def insert(self, key, value=None):
         """ Create a new node with the given key and value """

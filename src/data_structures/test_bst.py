@@ -149,11 +149,11 @@ def test_contains_false_2(known_bst):
     assert known_bst[0].contains(15) is False
 
 
-def test_depth(known_bst):
-    """check the depth of the left branch"""
-    assert known_bst[0].depth() == 3
-
-
+# def test_depth(known_bst):
+#     """check the depth of the left branch"""
+#     assert known_bst[0].depth() == 3
+#
+#
 # def test_depth_empty():
 #     """check the depth of an empty graph"""
 #     bst = BST()
