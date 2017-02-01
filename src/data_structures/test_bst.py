@@ -159,6 +159,18 @@ def test_size_1():
     assert bst.size() == 1
 
 
+def test_bst():
+    """Check bst method (Breadth First Traverse)"""
+    bst = BST()
+    bst.insert(23)
+    assert bst.root.key == 23
+    assert bst.contains(23) is True
+    result = []
+    for i in bst.bft():
+        result.append(i)
+    assert result == [23]
+
+
 # def test_depth(known_bst):
 #     """check the depth of the left branch"""
 #     assert known_bst[0].depth() == 3
@@ -197,14 +209,14 @@ def test_size_1():
 #     assert bst.balance() == 0
 #
 #
-# def test_breath_first_traversal(our_bsts):
-#     """test that breadtch first traversal work"""
-#     bft = []
-#     for i in our_bsts[0].breadth_first_traversal():
-#         bft.append(i)
-#     assert bft == our_bsts[3]
-#
-#
+def test_breath_first_traversal(our_bsts):
+    """test that breadtch first traversal work"""
+    bft = []
+    for i in our_bsts[0].bft():
+        bft.append(i)
+    assert bft == our_bsts[3]
+
+
 # def test_pre_order_traversal(our_bsts):
 #     """test that breadtch first traversal work"""
 #     bpo = []

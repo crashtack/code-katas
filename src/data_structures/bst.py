@@ -9,6 +9,7 @@
             - depth
             - balance
 """
+from collections import deque
 
 
 class Node(object):
@@ -70,3 +71,17 @@ class BST(object):
     def size(self):
         """ Returns the number of nodes in the BST """
         return self._size
+
+    def bft(self):
+        """ Breadth First Traverse
+            Returns a list of node keys
+        """
+        queue = deque()
+        queue.append(self.root)
+        # import pdb; pdb.set_trace()
+        while len(queue):
+            current = queue.popleft()
+            if current:
+                queue.append(current.left)
+                queue.append(current.right)
+                yield current.key
