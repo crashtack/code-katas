@@ -116,6 +116,12 @@ def test_insert3_left():
     assert bst.root.left.key == 2
 
 
+def test_contains_empty_bst():
+    """test contains for an empty BST"""
+    bst = BST()
+    assert bst.contains(23) is False
+
+
 def test_contains_root(known_bst):
     """Check the known_bst root"""
     assert known_bst[0].contains(5) is True
@@ -171,6 +177,23 @@ def test_bst():
     assert result == [23]
 
 
+def test_breath_first_traversal(our_bsts):
+    """test that breadtch first traversal work"""
+    bft = []
+    for i in our_bsts[0].bft():
+        bft.append(i)
+    assert bft == our_bsts[3]
+
+
+# def test_delete_1():
+#     """Test the deletion method"""
+#     bst = BST()
+#     bst.insert(23)
+#     assert bst.contains(23) is True
+#     assert bst.root.key == 23
+#     bst.delete(23)
+#     assert bst.contains(23) is False
+#
 # def test_depth(known_bst):
 #     """check the depth of the left branch"""
 #     assert known_bst[0].depth() == 3
@@ -209,14 +232,6 @@ def test_bst():
 #     assert bst.balance() == 0
 #
 #
-def test_breath_first_traversal(our_bsts):
-    """test that breadtch first traversal work"""
-    bft = []
-    for i in our_bsts[0].bft():
-        bft.append(i)
-    assert bft == our_bsts[3]
-
-
 # def test_pre_order_traversal(our_bsts):
 #     """test that breadtch first traversal work"""
 #     bpo = []

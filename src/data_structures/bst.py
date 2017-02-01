@@ -85,3 +85,18 @@ class BST(object):
                 queue.append(current.left)
                 queue.append(current.right)
                 yield current.key
+
+    def delete(self, key=None):
+        """ Delete a Node :
+            Need to work on this:
+            TODO: Implement Node.delete()
+        """
+        self.root.delete(key)
+        #
+        #
+        # current = self.root
+        # import pdb; pdb.set_trace()
+        # if key == current.key:
+        #     # delete the current node
+        #     if current.left is None:
+        #         current = current.right
